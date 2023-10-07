@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./resources/**/*.{blade.php,js}"],
+  content: ["./resources/**/*.{blade.php,js,tsx}"],
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
@@ -988,6 +988,6 @@ module.exports = {
       50: '50',
     },
   },
-  plugins: [],
+  plugins: ['tailwindcss, autoprefixer', 'tailwindcss-float'],
 }
 

@@ -8,17 +8,13 @@
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-        </style>
-
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('ts/app.js') }}"></script>
     </head>
     <body class="antialiased">
-        @yield('content')
+        <div class="container mx-auto" id="root">
+            @yield('content')
+        </div>
     </body>
 </html>

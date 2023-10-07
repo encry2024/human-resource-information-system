@@ -1,10 +1,6 @@
-let num1: number;
-let num2: number;
-let result: number;
+function testFunction(num1: object, num2: number, num3: number)
+{
+    return num1;
+}
 
-num1 = 5;
-num2 = 5;
-
-result = num1 + num2;
-
-console.log(result);
+console.log(testFunction({"name": "Test"}, 5, 0));

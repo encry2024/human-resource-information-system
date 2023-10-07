@@ -3,5 +3,6 @@
 Ingredients:
 
 * Backend - Laravel
-* Frontend - React
+* Frontend - React/Typescript
 * Database - PostgreSQL
+* CSS - Tailwind

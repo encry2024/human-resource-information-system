@@ -1,7 +1,11 @@
 const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
+const $ = require('jquery');
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-    ]);
+    .ts('resources/ts/App.ts', 'public/ts/app.js')
+    .copy('node_modules/jquery/dist/jquery.min.js', 'public/js')
+    .options({
+        postCss: [tailwindcss('./tailwind.config.js')],
+    })
+    .version();

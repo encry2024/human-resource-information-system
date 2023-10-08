@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Backend\Auth\DashboardController;
+use App\Http\Controllers\Backend\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', [TestController::class, 'index']);
+Route::get('/login', [LoginController::class, ['index']]);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+});

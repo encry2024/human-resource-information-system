@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [TestController::class, 'index']);
+Route::get('/login', [TestController::class, 'index']);

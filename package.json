@@ -5,9 +5,9 @@
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
         "prod": "npm run production",
-        "prod-watch": "npm run production -- --watch",
+        "watch:production": "npm run production -- --watch",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "tailwind:watch": "tailwindcss build -o public/css/app.css --watch"
+        "watch:tailwind": "tailwindcss build -o public/css/app.css --watch"
     },
     "devDependencies": {
         "@babel/core": "^7.23.0",

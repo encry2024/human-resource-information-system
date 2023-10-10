@@ -11,6 +11,16 @@
 |
 */
 
-Route::prefix('user')->group(function() {
-    Route::get('/', 'UserController@index');
+use Illuminate\Support\Facades\Route;
+use Modules\User\Http\Controllers\LoginController;
+use Modules\User\Http\Controllers\UserController;
+
+Route::get('/login', [LoginController::class, 'login']);
+
+Route::middleware(['auth'])->group(function() {
+
+    Route::prefix('user')->group(function() {
+        Route::get('/dashboard', [UserController::class, 'index']);
+    });
+
 });

@@ -12,17 +12,14 @@ class DepartmentTest extends TestCase
     /**
      * A basic create unit test for Department module.
      *
-     * @return boolean
+     * @return void
      */
-    public function test_create_department(): bool
+    public function test_store_department(): void
     {
         $department = new Department();
         $department->name = "Test Department 0001";
         $department->department_code = "TD0001";
-
-        if (!$department->save()) {
-            return false;
-        }
+        $department->save();
 
         $this->assertTrue(true);
     }

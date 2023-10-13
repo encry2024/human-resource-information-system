@@ -42,6 +42,7 @@ const Login: React.FC = () => {
                             onChange={(e) => setUsername((e.target.value))}
                         />
                     </div>
+
                     <div className="mb-12">
                         <label htmlFor="password" className="block text-gray-600">Password</label>
                         <input
@@ -54,10 +55,12 @@ const Login: React.FC = () => {
                             onChange={(e) => setPassword((e.target.value))}
                         />
                     </div>
+
                     <div className="mb-4">
                         <button
                             type="submit"
-                            className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300"
+                            className="w-full bg-indigo-500 text-white py-2 rounded-lg
+                            hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300"
                         >
                             Login
                         </button>

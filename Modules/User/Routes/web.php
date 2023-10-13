@@ -16,6 +16,7 @@ use Modules\User\Http\Controllers\LoginController;
 use Modules\User\Http\Controllers\UserController;
 
 Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
 
 Route::middleware(['auth'])->group(function() {
 

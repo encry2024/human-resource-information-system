@@ -2751,7 +2751,7 @@ var Login = function Login() {
     className: "mb-4"
   }, react_1["default"].createElement("button", {
     type: "submit",
-    className: "w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300"
+    className: "w-full bg-indigo-500 text-white py-2 rounded-lg\n                            hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-300"
   }, "Login")))));
 };
 exports["default"] = Login;

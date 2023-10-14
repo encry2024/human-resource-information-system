@@ -2,17 +2,32 @@
 
 namespace Modules\User\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use SoftDeletes,
+        HasApiTokens;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    protected $fillable = [
+        'username',
+        'password',
+        'email'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password'
+    ];
+
+    public function username(): string
     {
-        return \Modules\User\Database\factories\UserFactory::new();
+        return 'username';
     }
 }

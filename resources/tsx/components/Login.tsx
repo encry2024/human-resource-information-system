@@ -1,26 +1,51 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import '../../../public/css/app.css';
+import Cookies from 'js-cookie';
+import {ILoginForm} from "../model/User/Login";
 
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [formData, setFormData] = useState<ILoginForm>({
+        username: '',
+        password: '',
+    });
 
-    const userLogin = async(event: React.FormEvent) => {
+    const inputEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const userLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
         try {
-            event.preventDefault();
+            // Perform client-side validation (e.g., checking if fields are not empty).
 
-            const response = await axios.post('/login/authenticate', {
-                username,
-                password
+            // Send a POST request to your server's login endpoint with user input.
+            const response = await axios.post('/login/authenticate', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
             });
 
-            console.log(response);
+            if (response.status === 200) {
+                // Successful login, handle the response, e.g., storing a token and redirecting.
+                const uToken = response.data.token;
+
+                Cookies.set('_token', uToken, {
+                    expires: 20,
+                    secure: true,
+                    sameSite: 'strict',
+                });
+            } else {
+                // Handle login error, e.g., displaying an error message to the user.
+                console.error('Login failed');
+            }
         } catch (error) {
-            setError('Username or password is incorrect.');
+            // Handle network or other errors.
+            console.error('Network error', error);
         }
-    }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -39,7 +64,8 @@ const Login: React.FC = () => {
                             className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-300"
                             placeholder="Your username"
                             required
-                            onChange={(e) => setUsername((e.target.value))}
+                            value={formData.username}
+                            onChange={inputEvent}
                         />
                     </div>
 
@@ -52,7 +78,8 @@ const Login: React.FC = () => {
                             className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-300"
                             placeholder="Your password"
                             required
-                            onChange={(e) => setPassword((e.target.value))}
+                            value={formData.password}
+                            onChange={inputEvent}
                         />
                     </div>
 

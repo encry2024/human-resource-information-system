@@ -9,10 +9,5 @@ class UserType extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\User\Database\factories\UserTypeFactory::new();
-    }
+    protected $fillable = ['name'];
 }

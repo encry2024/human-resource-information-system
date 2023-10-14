@@ -4,7 +4,7 @@ const $ = require('jquery');
 
 mix.js('resources/js/app.js', 'public/js')
     .ts([
-        'resources/tsx/App.ts',
+        'resources/tsx/App.tsx',
         'resources/tsx/components/Login.tsx',
         'resources/tsx/Index.tsx'
     ], 'public/ts/app.js').react()

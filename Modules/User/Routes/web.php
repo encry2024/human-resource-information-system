@@ -18,10 +18,10 @@ use Modules\User\Http\Controllers\UserController;
 Route::get('/login', [LoginController::class, 'login']);
 Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth:api'])->group(function() {
 
     Route::prefix('user')->group(function() {
-        Route::get('/dashboard', [UserController::class, 'index']);
+        Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     });
 
 });

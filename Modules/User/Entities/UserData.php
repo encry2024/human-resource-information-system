@@ -4,15 +4,24 @@ namespace Modules\User\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserData extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
-    {
-        return \Modules\User\Database\factories\UserDataFactory::new();
-    }
+    protected $fillable = [
+        'user_id',
+        'user_type_id',
+        'country_id',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'telephone_number',
+        'mobile_number',
+        'postal_code',
+        'address',
+        'date_of_birth',
+        'email'
+    ];
 }

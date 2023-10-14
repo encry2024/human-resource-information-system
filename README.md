@@ -16,6 +16,6 @@ Ingredients:
 * Attendance - This includes logins and logouts.
 * Announcements
 * Performance Appraisal
-
+* Laravel Passport
 
 // Other functions will be added on the near future

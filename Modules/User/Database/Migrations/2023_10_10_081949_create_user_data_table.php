@@ -18,10 +18,10 @@ return new class extends Migration
             $table->bigInteger('user_type_id');
             $table->bigInteger('user_id');
             $table->integer('country_id');
-            $table->integer('postal_code');
             $table->string('first_name')->index();
             $table->string('middle_name')->index();
             $table->string('last_name')->index();
+            $table->integer('postal_code');
             $table->text('address');
             $table->string('telephone_number')->nullable();
             $table->string('mobile_number')->index();

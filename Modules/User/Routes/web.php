@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 use Modules\User\Http\Controllers\LoginController;
 use Modules\User\Http\Controllers\UserController;
 
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/', function () {
+    return redirect(route('login'));
+});
+
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
 
 Route::middleware(['auth:api'])->group(function() {

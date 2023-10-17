@@ -1,14 +1,20 @@
 import React from 'react';
+import Sidebar from "../../../../../../resources/tsx/components/Sidebar";
 
 const Dashboard: React.FC = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
-
-                <div className="bg-indigo-500 ml-[-2rem] mb-9">
-                    <h2 className="text-2xl font-semibold mb-4 p-2 text-right text-white">HRIS :: Dashboard</h2>
+        <div className={`flex`}>
+            <Sidebar />
+            <div className="bg-gray-100 p-8 w-full">
+                <div className={`sticky top-0 z-50`}>
+                    <div className="bg-indigo-500 mb-9 rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-semibold mb-4 p-2 text-white">Dashboard</h2>
+                    </div>
                 </div>
 
+                <div className="bg-white p-8 rounded-lg shadow-lg w-full max-h-full">
+
+                </div>
             </div>
         </div>
     );

@@ -14,7 +14,7 @@
     </head>
 
     <body class="antialiased">
-        <div class="container mx-auto" id="root">
+        <div id="root">
         </div>
     </body>
 </html>

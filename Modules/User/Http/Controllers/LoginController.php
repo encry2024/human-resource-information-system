@@ -21,20 +21,20 @@ class LoginController extends Controller
         return view('user::components.login');
     }
 
-    public function authenticate(Request $request): JsonResponse|RedirectResponse
+    public function authenticate(Request $request): JsonResponse
     {
         $credentials = [
             'username' => $request->get('username'),
             'password' => $request->get('password')
         ];
 
-        if (!Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) === false) {
             return response()->json(['message' => "Username or password is incorrect."], 401);
         }
 
         $user = $request->user();
         $token = $user->createToken('uToken')->accessToken;
 
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token])->withCookie('_token', $token);
     }
 }

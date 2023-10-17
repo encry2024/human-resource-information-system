@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import '../../../public/css/app.css';
-import Cookies from 'js-cookie';
 import {ILoginForm} from "../model/User/Login";
+import {useNavigate} from "react-router-dom";
+import {FormValidator} from "../Validation/FormValidation";
+import ErrorElement from "./Alert/Error";
 
 const Login: React.FC = () => {
+    const navigate = useNavigate()
+    const [errorMessages, setErrorMessages] = useState<string[]>([]);
+
     const [formData, setFormData] = useState<ILoginForm>({
         username: '',
         password: '',
@@ -14,45 +18,48 @@ const Login: React.FC = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
     const userLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        const validateLogin = new FormValidator();
+        const validationErrors = validateLogin.validateLoginForm(formData) ?? [];
 
         try {
-            // Perform client-side validation (e.g., checking if fields are not empty).
-
-            // Send a POST request to your server's login endpoint with user input.
-            const response = await axios.post('/login/authenticate', formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            if (response.status === 200) {
-                // Successful login, handle the response, e.g., storing a token and redirecting.
-                const uToken = response.data.token;
-
-                Cookies.set('_token', uToken, {
-                    expires: 20,
-                    secure: true,
-                    sameSite: 'strict',
+            if (validationErrors.length === 0) {
+                const response = await axios.post('/login/authenticate', formData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 });
+
+                if (response.status == 200) {
+                    navigate('/user/dashboard');
+                }
             } else {
-                // Handle login error, e.g., displaying an error message to the user.
-                console.error('Login failed');
+                setErrorMessages(validationErrors);
             }
-        } catch (error) {
-            // Handle network or other errors.
-            console.error('Network error', error);
+            // Send a POST request to your server's login endpoint with user input.
+        } catch (error: any) {
+            if (error.response) {
+                if (error.response.status === 401) {
+                    setErrorMessages([error.response.data.message]);
+                } else {
+                    // Handle network or other errors.
+                    setErrorMessages([error]);
+                }
+            } else {
+                setErrorMessages([`Network error: ${error.message}`]);
+            }
         }
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg w-1/3">
-                <div className="bg-indigo-500 ml-[-2rem] mb-9">
+                <div className="bg-indigo-500 ml-[-2rem]">
                     <h2 className="text-2xl font-semibold mb-4 p-2 text-right text-white">HRIS :: Login</h2>
                 </div>
+
+                <ErrorElement errorMessages={errorMessages} />
 
                 <form onSubmit={userLogin}>
                     <div className="mb-7">

@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from "../../../../../../resources/tsx/components/Sidebar";
+import Sidebar from "../../../../../../resources/tsx/Components/Sidebar";
 
 const Dashboard: React.FC = () => {
     return (

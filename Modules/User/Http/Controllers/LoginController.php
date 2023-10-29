@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Modules\User\Entities\UserView;
 
 class LoginController extends Controller
 {
@@ -32,9 +33,14 @@ class LoginController extends Controller
             return response()->json(['message' => "Username or password is incorrect."], 401);
         }
 
+        $userView = UserView::getAuthData();
+
         $user = $request->user();
         $token = $user->createToken('uToken')->accessToken;
 
-        return response()->json(['token' => $token])->withCookie('_token', $token);
+        return response()->json([
+            'token' => $token,
+            'auth' => $userView
+        ])->withCookie('_token', $token);
     }
 }

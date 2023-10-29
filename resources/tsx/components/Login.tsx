@@ -1,56 +1,39 @@
 import React, {useState} from 'react';
-import axios from 'axios';
-import {ILoginForm} from "../model/User/Login";
 import {useNavigate} from "react-router-dom";
-import {FormValidator} from "../Validation/FormValidation";
 import ErrorElement from "./Alert/Error";
+import {IUserInput} from "../Interfaces/IUserInput";
+import {Authentication} from "../Model/User/Authentication";
+import { useUser } from '../../../Modules/User/Resources/assets/tsx/Provider/User/UserProvider';
 
 const Login: React.FC = () => {
     const navigate = useNavigate()
+    const { user, setUser } = useUser();
+    const authentication = new Authentication();
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
-
-    const [formData, setFormData] = useState<ILoginForm>({
-        username: '',
-        password: '',
-    });
 
     const inputEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    const userLogin = async (e: React.FormEvent) => {
+
+    const [formData, setFormData] = useState<IUserInput['userLogin']>({
+        username: '',
+        password: '',
+    });
+
+    const handleAuthenticate = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const validateLogin = new FormValidator();
-        const validationErrors = validateLogin.validateLoginForm(formData) ?? [];
 
-        try {
-            if (validationErrors.length === 0) {
-                const response = await axios.post('/login/authenticate', formData, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
+        const response = await authentication.Authenticate(formData);
 
-                if (response.status == 200) {
-                    navigate('/user/dashboard');
-                }
-            } else {
-                setErrorMessages(validationErrors);
-            }
-            // Send a POST request to your server's login endpoint with user input.
-        } catch (error: any) {
-            if (error.response) {
-                if (error.response.status === 401) {
-                    setErrorMessages([error.response.data.message]);
-                } else {
-                    // Handle network or other errors.
-                    setErrorMessages([error]);
-                }
-            } else {
-                setErrorMessages([`Network error: ${error.message}`]);
-            }
+        if (!Array.isArray(response)) {
+            localStorage.setItem('auth', JSON.stringify(response?.data.auth));
+            console.log('Login Console Log', localStorage.getItem('auth'));
+            navigate('/user/dashboard');
+        } else {
+            setErrorMessages(response);
         }
-    };
+    }
 
     return (
         <div className={`container mx-auto`}>
@@ -62,7 +45,7 @@ const Login: React.FC = () => {
 
                     <ErrorElement errorMessages={errorMessages} />
 
-                    <form onSubmit={userLogin}>
+                    <form onSubmit={handleAuthenticate}>
                         <div className="mb-7">
                             <label htmlFor="username" className="block text-gray-600">Username</label>
                             <input

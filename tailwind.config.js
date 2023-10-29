@@ -989,6 +989,22 @@ module.exports = {
       50: '50',
     },
   },
-  plugins: ['tailwindcss, autoprefixer', 'tailwindcss-float'],
+  plugins: [
+    require('autoprefixer'),
+    function({ addComponents, theme }) {
+      const components = {
+        '.sidebar--link': {
+          display: 'block',
+          fontSize: theme('fontSize.sm'),
+          padding: `${theme('spacing.2')} ${theme('spacing.6')}`,
+          '&:hover': {
+            backgroundColor: theme('colors.gray.700'),
+          },
+        },
+      }
+
+      addComponents(components)
+    }
+  ],
 }
 

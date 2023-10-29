@@ -5,6 +5,7 @@ namespace Modules\User\Http\Controllers;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
@@ -80,5 +81,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        Auth::logout();
+        $cookie = cookie()->forget('token');
+
+        return response()->json([
+            'message' => 'Logged out successfully!'
+        ])->withCookie($cookie);
     }
 }

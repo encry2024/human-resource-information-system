@@ -7,6 +7,7 @@ Ingredients:
 * Database - PostgreSQL
 * CSS - Tailwind
 * Laravel Passport
+* WordPress (Dummy company website.)
 
 # Functionalities
 
@@ -17,5 +18,6 @@ Ingredients:
 * Attendance - This includes logins and logouts.
 * Announcements
 * Performance Appraisal
+* Audit Trail
 
 // Other functions will be added on the near future

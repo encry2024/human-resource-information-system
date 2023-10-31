@@ -13,7 +13,8 @@ const RequestsMenu: React.FC<RequestsMenuProps> = ({ title }) => {
 
     return (
         <div className={`mb-2`}>
-            <div className="flex items-center">
+            {/**/}
+            {/*<div className="flex items-center">
                 <a
                     href="#"
                     className="block text-sm py-2 px-6 hover:bg-gray-700 w-full"
@@ -42,26 +43,29 @@ const RequestsMenu: React.FC<RequestsMenuProps> = ({ title }) => {
                         </svg>
                     </button>
                 </a>
-            </div>
+            </div>*/}
             <ul
                 className={`sub-menu pl-8 overflow-hidden ${
                     subMenuOpen ? "max-h-96 duration-500 ease-in-out" : "duration-500 ease-in-out max-h-0"
                 }`}
             >
                 <li className="mt-2 mb-2">
-                    <a href="#" className="block text-sm py-2 px-6 hover:bg-gray-700">Vacation Leave</a>
+                    <a href="#" className="sidebar--links">Users</a>
+                </li>
+                <li className="mt-2 mb-2">
+                    <a href="#" className="sidebar--links">Vacation Leave</a>
                 </li>
                 <li className="mb-2">
-                    <a href="#" className="block text-sm py-2 px-6 hover:bg-gray-700">Sick Leave</a>
+                    <a href="#" className="sidebar--links">Sick Leave</a>
                 </li>
                 <li className="mb-2">
-                    <a href="#" className="block text-sm py-2 px-6 hover:bg-gray-700">Bereavement Leave</a>
+                    <a href="#" className="sidebar--links">Bereavement Leave</a>
                 </li>
                 <li className="mb-2">
-                    <a href="#" className="block text-sm py-2 px-6 hover:bg-gray-700">Maternity Leave</a>
+                    <a href="#" className="sidebar--links">Maternity Leave</a>
                 </li>
                 <li className="mb-2">
-                    <a href="#" className="block text-sm py-2 px-6 hover:bg-gray-700">Emergency Leave</a>
+                    <a href="#" className="sidebar--links">Emergency Leave</a>
                 </li>
             </ul>
         </div>

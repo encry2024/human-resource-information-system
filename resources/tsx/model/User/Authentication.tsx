@@ -38,4 +38,21 @@ export class Authentication
             }
         }
     }
+
+    public async logout() {
+        try {
+            const response = await axios.post('/user/logout')
+            let responseMessage = [];
+
+            if (response.status === 200) {
+                return responseMessage.push({
+                    'data': response
+                });
+            } else {
+                return ["User cannot logged out. Something went wrong to the server!"];
+            }
+        } catch (error: any) {
+            return [`Network error: ${error}`];
+        }
+    }
 }

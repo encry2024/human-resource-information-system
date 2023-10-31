@@ -989,20 +989,23 @@ module.exports = {
       50: '50',
     },
   },
+
   plugins: [
     require('autoprefixer'),
     function({ addComponents, theme }) {
       const components = {
-        '.sidebar--link': {
+        '.sidebar__link': {
           display: 'block',
           fontSize: theme('fontSize.sm'),
           padding: `${theme('spacing.2')} ${theme('spacing.6')}`,
           '&:hover': {
             backgroundColor: theme('colors.gray.700'),
-          },
+          }
+        },
+        '.sidebar__link--active': {
+          backgroundColor: theme('colors.gray.600'),
         },
       }
-
       addComponents(components)
     }
   ],

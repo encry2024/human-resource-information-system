@@ -22,10 +22,15 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
 
+
 Route::middleware(['auth:api'])->group(function() {
 
     Route::prefix('user')->group(function() {
         Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+
+        Route::get('/users', [UserController::class, 'list'])->name('user.list');
+
+        Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
     });
 
 });

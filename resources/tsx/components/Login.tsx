@@ -3,16 +3,15 @@ import {useNavigate} from "react-router-dom";
 import ErrorElement from "./Alert/Error";
 import {IUserInput} from "../Interfaces/IUserInput";
 import {Authentication} from "../Model/User/Authentication";
-import { useUser } from '../../../Modules/User/Resources/assets/tsx/Provider/User/UserProvider';
 
 const Login: React.FC = () => {
     const navigate = useNavigate()
-    const { user, setUser } = useUser();
     const authentication = new Authentication();
     const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
     const inputEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+
         setFormData({ ...formData, [name]: value });
     };
 
@@ -28,8 +27,8 @@ const Login: React.FC = () => {
 
         if (!Array.isArray(response)) {
             localStorage.setItem('auth', JSON.stringify(response?.data.auth));
-            console.log('Login Console Log', localStorage.getItem('auth'));
-            navigate('/user/dashboard');
+
+            navigate('/admin/dashboard');
         } else {
             setErrorMessages(response);
         }

@@ -25,7 +25,7 @@ Route::post('/login/authenticate', [LoginController::class, 'authenticate']);
 
 Route::middleware(['auth:api'])->group(function() {
 
-    Route::prefix('user')->group(function() {
+    Route::prefix('admin')->group(function() {
         Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
 
         Route::get('/users', [UserController::class, 'list'])->name('user.list');

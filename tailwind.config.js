@@ -994,6 +994,12 @@ module.exports = {
     require('autoprefixer'),
     function({ addComponents, theme }) {
       const components = {
+        html: {
+          height: '100%'
+        },
+        body: {
+            height: '100%'
+        },
         '.sidebar__link': {
           display: 'block',
           fontSize: theme('fontSize.sm'),

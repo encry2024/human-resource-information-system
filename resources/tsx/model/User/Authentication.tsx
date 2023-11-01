@@ -41,7 +41,7 @@ export class Authentication
 
     public async logout() {
         try {
-            const response = await axios.post('/user/logout')
+            const response = await axios.post('/admin/logout')
             let responseMessage = [];
 
             if (response.status === 200) {

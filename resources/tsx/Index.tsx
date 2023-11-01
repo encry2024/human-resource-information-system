@@ -19,8 +19,8 @@ if (rootDom) {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/login" element={<Login />}/>
-                        <Route path="/user/dashboard" element={<Dashboard />}/>
-                        <Route path="/user/users" element={<UserList />}/>
+                        <Route path="/admin/dashboard" element={<Dashboard />}/>
+                        <Route path="/admin/users" element={<UserList />}/>
                     </Routes>
                 </BrowserRouter>
             </UserProvider>

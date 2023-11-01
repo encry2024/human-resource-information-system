@@ -14,7 +14,7 @@
     </head>
 
     <body class="antialiased">
-        <div id="root">
+        <div id="root" style="height: 100%;">
         </div>
     </body>
 </html>
